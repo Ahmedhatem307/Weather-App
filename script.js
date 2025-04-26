@@ -1,12 +1,15 @@
+const display = document.querySelector("#dis-temp");
 
 function extracting_data(data) {
-    console.log("hello");
-    //const data = JSON.parse(json_data);
-    celsius(data.currentConditions.temp);
+    if (document.querySelector("#fahr").checked) {
+        display.innerHTML = data.currentConditions.temp
+    } else {
+        celsius(data.currentConditions.temp);
+    }
 }
 
 function celsius(fahr) {
-    console.log(Math.round((fahr - 32) * (5 / 9)));
+    display.innerHTML = Math.round((fahr - 32) * (5 / 9));
 }
 
 async function get_weather_data(location) {
@@ -21,7 +24,12 @@ async function get_weather_data(location) {
     }
 }
 
+const submit_btn = document.querySelector("#btn1");
+submit_btn.addEventListener("click", () => {
 
+    const city = document.querySelector("#location");
+    get_weather_data(city.value);
 
+    event.preventDefault();
+})
 
-get_weather_data("London");
